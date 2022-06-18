@@ -8,7 +8,7 @@ cache = {'meta': {}}
 
 
 @retry(stop=stop_after_attempt(3), wait=wait_fixed(5))  # retries on error.
-@ratelimit(calls=4, duration=1, sleep=True)  # limits calls to 4 per second.
+@ratelimit(duration=1/4, sleep=True)  # limits calls to 4 per second.
 def fetch(path: str, param: dict = None) -> dict:
     return request('GET', f'https://public-api.solscan.io/{path}', params=param).json()
 
